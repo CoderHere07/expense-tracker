@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpense as addExpenseAction, deleteExpense as deleteExpenseAction } from '../store/expenseSlice.js';
-import { filterReducer, initialFilter } from './filterReducer.js';
+import { addExpense as addExpenseAction, deleteExpense as deleteExpenseAction } from '../store/expenseSlice';
+import { filterReducer, initialFilter } from './filterReducer';
 
 export function useExpenses() {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AddExpenseForm from '../components/AddExpenseForm.jsx';
+import AddExpenseForm from '../components/AddExpenseForm';
 
-test('title less than 3 show error', async () => {
+test('shows an error when the title is shorter than 3 characters', async () => {
   const onAdd = jest.fn();
   render(<AddExpenseForm onAdd={onAdd} />);
   await userEvent.type(screen.getByLabelText('Title'), 'ab');
@@ -12,7 +12,7 @@ test('title less than 3 show error', async () => {
   expect(onAdd).not.toHaveBeenCalled();
 });
 
-test('amount 0 show error', async () => {
+test('shows an error when the amount is 0', async () => {
   const onAdd = jest.fn();
   render(<AddExpenseForm onAdd={onAdd} />);
   await userEvent.type(screen.getByLabelText('Title'), 'Lunch');

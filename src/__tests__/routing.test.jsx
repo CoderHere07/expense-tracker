@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { AuthProvider } from '../auth/AuthContext.jsx';
-import ProtectedRoute from '../auth/ProtectedRoute.jsx';
-import ErrorBoundary from '../components/ErrorBoundary.jsx';
+import { AuthProvider } from '../auth/AuthContext';
+import ProtectedRoute from '../auth/ProtectedRoute';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 beforeEach(() => localStorage.clear());
 
-test('without login, redirect to login page from dashboard', () => {
+test('redirects to the login page when visiting /dashboard while logged out', () => {
   render(
     <MemoryRouter initialEntries={['/dashboard']}>
       <AuthProvider>
@@ -21,7 +21,7 @@ test('without login, redirect to login page from dashboard', () => {
   expect(screen.queryByText('Secret')).not.toBeInTheDocument();
 });
 
-test('ErrorBoundary crash show fallback UI', () => {
+test('ErrorBoundary shows the fallback UI when a child crashes', () => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
   const Bomb = () => { throw new Error('boom'); };
   render(<ErrorBoundary><Bomb /></ErrorBoundary>);
