@@ -1,14 +1,23 @@
-import { lazy, Suspense, useCallback, useState } from 'react';
-import { useAuth } from '../auth/AuthContext.jsx';
-import { useExpenses } from '../hooks/useExpenses.js';
-import { CATEGORIES } from '../data/dummyExpenses.js';
-import AddExpenseForm from '../components/AddExpenseForm.jsx';
-import ExpenseItem from '../components/ExpenseItem.jsx';
+import { lazy, Suspense, useCallback, useLayoutEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../auth/AuthContext';
+import { useExpenses } from '../hooks/useExpenses';
+import { CATEGORIES } from '../data/dummyExpenses';
+import { loadExpenses } from '../store/expenseSlice';
+import { loadForUser } from '../store/persistence';
+import AddExpenseForm from '../components/AddExpenseForm';
+import ExpenseItem from '../components/ExpenseItem';
 
-const ExpenseDetailsModal = lazy(() => import('../components/ExpenseDetailsModal.jsx'));
+const ExpenseDetailsModal = lazy(() => import('../components/ExpenseDetailsModal'));
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    dispatch(loadExpenses({ owner: user.email, items: loadForUser(user.email) }));
+  }, [dispatch, user.email]);
+
   const { expenses, total, category, setCategory, addExpense, deleteExpense } = useExpenses();
   const [selected, setSelected] = useState(null);
 
