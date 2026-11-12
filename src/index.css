@@ -1,1 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&family=Share+Tech+Mono&display=swap");
 @import "tailwindcss";
+
+:root {
+  --walnut: #3b2a20;
+  --leather: #4a2f20;
+  --stitch: #d9b97a;
+  --paper: #f3f1ea;
+  --brass-hi: #e9cc7e;
+  --brass-lo: #b8892f;
+  --ink: #2b1d12;
+  --ui: "Bitter", Georgia, serif;
+  --mono: "Share Tech Mono", "Courier New", monospace;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--ui);
+  color: #f1e3c4;
+  background:
+    repeating-linear-gradient(92deg, rgba(0,0,0,.07) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(88deg, rgba(255,255,255,.03) 0 1px, transparent 1px 11px),
+    linear-gradient(180deg, #4a362a, #33231a);
+}
+
+:focus-visible { outline: 3px solid #ffe08a; outline-offset: 2px; }
+
+/* Leather panel with stitched edge */
+.sk-ledger {
+  position: relative;
+  padding: 20px;
+  border-radius: 14px;
+  background:
+    radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.5px) 0 0 / 5px 5px,
+    linear-gradient(145deg, #5b3b29, var(--leather) 60%, #3d2619);
+  box-shadow: 0 14px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 6px rgba(0,0,0,.5);
+}
+.sk-ledger::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 2px dashed var(--stitch);
+  border-radius: 9px;
+  opacity: .75;
+  pointer-events: none;
+}
+.sk-ledger > * { position: relative; }
+
+/* Recessed field */
+.sk-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #1f130b;
+  border-radius: 7px;
+  background: #efe9da;
+  color: var(--ink);
+  font-family: var(--ui);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* Brass push button */
+.sk-brass {
+  padding: 9px 18px;
+  border: 1px solid #6b4d14;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass-lo));
+  color: #3a2a08;
+  font: 700 15px var(--ui);
+  text-shadow: 0 1px 0 rgba(255,255,255,.45);
+  cursor: pointer;
+  box-shadow: 0 4px 0 #6b4d14, 0 8px 10px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
+  transition: transform .08s, box-shadow .08s;
+}
+.sk-brass:active { transform: translateY(3px); box-shadow: 0 1px 0 #6b4d14, 0 3px 5px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6); }
+
+/* Engraved nameplate */
+.sk-plate {
+  display: inline-block;
+  padding: 6px 18px;
+  border: 1px solid #6b4d14;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass-lo));
+  color: #3a2a08;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  box-shadow: 0 3px 6px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* Calculator display in a metal bezel */
+.sk-bezel {
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e3e3df, #8d8d89);
+  box-shadow: 0 10px 20px rgba(0,0,0,.5), inset 0 1px 0 #fff, inset 0 -2px 4px rgba(0,0,0,.4);
+}
+.sk-lcd {
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #a9bb8a, #bccb9f);
+  color: #1d2915;
+  font-family: var(--mono);
+  box-shadow: inset 0 4px 10px rgba(0,0,0,.45);
+}
+.sk-lcd-label { font-size: 13px; opacity: .75; }
+.sk-lcd-value { font-size: 38px; text-shadow: 2px 2px 0 rgba(29,41,21,.15); }
+
+.sk-err { margin-top: 4px; color: #ffb4a8; font-size: 14px; }
+
+/* Paper slip for the details dialog */
+.sk-slip {
+  padding: 24px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fbfaf5, var(--paper));
+  color: var(--ink);
+  font-family: var(--mono);
+  box-shadow: 0 18px 40px rgba(0,0,0,.6);
+}
+
+@media (prefers-reduced-motion: reduce) { .sk-brass { transition: none; } }

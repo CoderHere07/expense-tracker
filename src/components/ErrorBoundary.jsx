@@ -10,10 +10,9 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div role="alert" className="p-8 text-center">
-          <h2 className="text-xl font-bold">Something went wrong</h2>
-          <button className="mt-3 rounded bg-indigo-600 px-4 py-2 text-white"
-            onClick={() => this.setState({ hasError: false })}>
+        <div role="alert" className="sk-ledger mx-auto mt-16 max-w-md text-center">
+          <h2 className="mb-3 text-xl font-bold">Something went wrong</h2>
+          <button className="sk-brass" onClick={() => this.setState({ hasError: false })}>
             Try again
           </button>
         </div>

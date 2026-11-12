@@ -1,14 +1,14 @@
 export default function ExpenseDetailsModal({ expense, onClose }) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40" onClick={onClose}>
-      <div role="dialog" aria-modal="true" className="w-80 rounded-xl bg-white p-6"
-        onClick={e => e.stopPropagation()}>
-        <h2 className="mb-3 text-lg font-bold">{expense.title}</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+      <div role="dialog" aria-modal="true" aria-label="Expense details"
+        className="sk-slip w-full max-w-sm" onClick={e => e.stopPropagation()}>
+        <h2 className="mb-3 border-b-2 border-dashed border-stone-400 pb-2 text-lg font-bold">{expense.title}</h2>
         <p>Amount: Rs {expense.amount.toLocaleString()}</p>
         <p>Category: {expense.category}</p>
         <p>Date: {expense.date}</p>
-        <p className="text-xs text-gray-500">ID: {expense.id}</p>
-        <button className="mt-4 rounded bg-gray-800 px-4 py-2 text-white" onClick={onClose}>Close</button>
+        <p className="text-xs text-stone-500">ID: {expense.id}</p>
+        <button className="sk-brass mt-5" onClick={onClose}>Close</button>
       </div>
     </div>
   );
